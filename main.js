@@ -1,4 +1,21 @@
-const Discord = require('discord.js');
-const client = new Discord.Client(); 
+const { Client, Intents } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 
-client.login('OTQ1NjY3OTgzODczODIyNzMw.YhTf8Q.Zj6axULFx80Zyv-64blIlQ3oKFk')
+const prefix = '/';
+
+client.once('ready', () => {
+  console.log('deutbot online');
+});
+
+client.on('message', message =>{
+  if(!message.content.startsWith(prefix) || message.author.bot)return;
+
+  const args = message.content.slice(prefix.length).split(/ +/);
+  const command = args.shift().toLowerCase();
+
+  if (command  === 'ping'){
+    message.channel.send('pong');
+  }
+});
+
+client.login('OTQ1NjY3OTgzODczODIyNzMw.YhTf8Q._pAYfSXVoqG4x4qM0Q6y9xBBfbg')
